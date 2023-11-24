@@ -1,8 +1,8 @@
 {
-	"name": "CDK",
+	"name": "CrossRegionBackup",
 	"dockerComposeFile": ["docker-compose.yml"],
 	"service": "cdk-dev",
-	"workspaceFolder": "/workspace/CDK",
+	"workspaceFolder": "/workspace/CrossRegionBackup",
 	"postCreateCommand": "/bin/bash ./.devcontainer/post-create.sh",
 	"postStartCommand": "/bin/bash ./.devcontainer/post-start.sh",
 	"customizations": {

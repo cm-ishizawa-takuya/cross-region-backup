@@ -6,7 +6,7 @@ services:
     init: true
     command: sleep infinity
     volumes:
-      - ..:/workspace/CDK:cached
+      - ..:/workspace/CrossRegionBackup:cached
       - ~/.aws:/home/vscode/.aws:ro
       - aws_cli_cache_vol:/home/vscode/.aws/cli/cache/
       - ~/.config/gh/:/home/vscode/.config/gh/:ro
