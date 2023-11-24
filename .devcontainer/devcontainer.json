@@ -1,0 +1,23 @@
+{
+	"name": "CDK",
+	"dockerComposeFile": ["docker-compose.yml"],
+	"service": "cdk-dev",
+	"workspaceFolder": "/workspace/CDK",
+	"postCreateCommand": "/bin/bash ./.devcontainer/post-create.sh",
+	"postStartCommand": "/bin/bash ./.devcontainer/post-start.sh",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"MS-CEINTL.vscode-language-pack-ja",
+				"ms-azuretools.vscode-docker",
+				"dbaeumer.vscode-eslint",
+				"mhutchie.git-graph",
+				"GitHub.copilot",
+				"GitHub.copilot-chat",
+				"GitHub.vscode-pull-request-github",
+				"esbenp.prettier-vscode",
+				"ms-vscode.vscode-typescript-next"
+			]
+		}
+	}
+}

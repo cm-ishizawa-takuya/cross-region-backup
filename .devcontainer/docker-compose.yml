@@ -1,0 +1,24 @@
+services:
+  cdk-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    init: true
+    command: sleep infinity
+    volumes:
+      - ..:/workspace/CDK:cached
+      - ~/.aws:/home/vscode/.aws:ro
+      - aws_cli_cache_vol:/home/vscode/.aws/cli/cache/
+      - ~/.config/gh/:/home/vscode/.config/gh/:ro
+      - tmp_cache_vol:/tmp
+    network_mode: host
+
+volumes:
+  aws_cli_cache_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  tmp_cache_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs

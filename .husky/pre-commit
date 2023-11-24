@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+. "$(dirname -- "$0")/scripts/is-cdk-code-modified.sh"
+
+npx --no lint-staged --concurrent false
+
+if is_cdk_code_modified; then
+  echo ""
+  echo "Run CDK synth"
+  npx cdk synth -q
+
+  echo "Run Unit Tests"
+  npm run test
+fi

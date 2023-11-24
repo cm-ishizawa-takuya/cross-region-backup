@@ -1,0 +1,9 @@
+{
+  "*": [
+    "git secrets --scan"
+  ],
+  "(lib/**/*.{js,ts})|(bin/**/*.{js,ts})|(test/**/*.{js,ts})": [
+    "eslint --fix",
+    "prettier --write"
+  ]
+}
