@@ -1,0 +1,1461 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot test 1`] = `
+{
+  "Outputs": {
+    "BackupRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "BackupRoleF43CFD90",
+          "Arn",
+        ],
+      },
+    },
+    "ExportsOutputFnGetAttBackupRoleF43CFD90ArnD0257CF3": {
+      "Export": {
+        "Name": "BackupStage-BackupRoleStack:ExportsOutputFnGetAttBackupRoleF43CFD90ArnD0257CF3",
+      },
+      "Value": {
+        "Fn::GetAtt": [
+          "BackupRoleF43CFD90",
+          "Arn",
+        ],
+      },
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "BackupRoleF43CFD90": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "backup.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup",
+              ],
+            ],
+          },
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSBackupServiceRolePolicyForRestores",
+              ],
+            ],
+          },
+        ],
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": "iam:PassRole",
+                  "Effect": "Allow",
+                  "Resource": "*",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "iam-pass-policy",
+          },
+        ],
+        "RoleName": "cross-region-backup-role",
+      },
+      "Type": "AWS::IAM::Role",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Snapshot test 2`] = `
+{
+  "Outputs": {
+    "ExportsOutputFnGetAttKey961B73FDArn5A860C43": {
+      "Export": {
+        "Name": "BackupStage-PrimaryKeyStack:ExportsOutputFnGetAttKey961B73FDArn5A860C43",
+      },
+      "Value": {
+        "Fn::GetAtt": [
+          "Key961B73FD",
+          "Arn",
+        ],
+      },
+    },
+    "KeyArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "Key961B73FD",
+          "Arn",
+        ],
+      },
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "Key961B73FD": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "EnableKeyRotation": true,
+        "KeyPolicy": {
+          "Statement": [
+            {
+              "Action": "kms:*",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": [
+                  "arn:aws:iam::123456789012:user/test-user1",
+                  "arn:aws:iam::123456789012:user/test-user2",
+                ],
+              },
+              "Resource": "*",
+            },
+            {
+              "Action": "kms:*",
+              "Condition": {
+                "ArnLike": {
+                  "aws:PrincipalArn": [
+                    {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "arn:",
+                          {
+                            "Ref": "AWS::Partition",
+                          },
+                          ":iam::",
+                          {
+                            "Ref": "AWS::AccountId",
+                          },
+                          ":role/cdk-*-cfn-exec-role-",
+                          {
+                            "Ref": "AWS::AccountId",
+                          },
+                          "-",
+                          {
+                            "Ref": "AWS::Region",
+                          },
+                        ],
+                      ],
+                    },
+                    {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "arn:",
+                          {
+                            "Ref": "AWS::Partition",
+                          },
+                          ":iam::",
+                          {
+                            "Ref": "AWS::AccountId",
+                          },
+                          ":role/cdk-*-cfn-exec-role-",
+                          {
+                            "Ref": "AWS::AccountId",
+                          },
+                          "-ap-northeast-3",
+                        ],
+                      ],
+                    },
+                  ],
+                },
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":root",
+                    ],
+                  ],
+                },
+              },
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "kms:Encrypt",
+                "kms:Decrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*",
+                "kms:DescribeKey",
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::ImportValue": "BackupStage-BackupRoleStack:ExportsOutputFnGetAttBackupRoleF43CFD90ArnD0257CF3",
+                },
+              },
+              "Resource": "*",
+            },
+            {
+              "Action": "kms:CreateGrant",
+              "Condition": {
+                "StringEquals": {
+                  "kms:GrantIsForAWSResource": true,
+                },
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::ImportValue": "BackupStage-BackupRoleStack:ExportsOutputFnGetAttBackupRoleF43CFD90ArnD0257CF3",
+                },
+              },
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "KeySpec": "SYMMETRIC_DEFAULT",
+        "KeyUsage": "ENCRYPT_DECRYPT",
+        "MultiRegion": true,
+      },
+      "Type": "AWS::KMS::Key",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "KeyAlias910D852D": {
+      "Properties": {
+        "AliasName": "alias/backup-key",
+        "TargetKeyId": {
+          "Fn::GetAtt": [
+            "Key961B73FD",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::KMS::Alias",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Snapshot test 3`] = `
+{
+  "Outputs": {
+    "ExportsOutputFnGetAttKeyArn66D44B37": {
+      "Export": {
+        "Name": "BackupStage-ReplicaKeyStack:ExportsOutputFnGetAttKeyArn66D44B37",
+      },
+      "Value": {
+        "Fn::GetAtt": [
+          "Key",
+          "Arn",
+        ],
+      },
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "BackupRoleStackOutputsMyHandler7C1F850B": {
+      "DependsOn": [
+        "BackupRoleStackOutputsMyHandlerServiceRoleDefaultPolicyE63AF9A1",
+        "BackupRoleStackOutputsMyHandlerServiceRoleAACFE84E",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-ap-northeast-3",
+          },
+          "S3Key": "3803df2f6849acf50bb6577ee095a669940670e799f70a2be34893a399777bc3.zip",
+        },
+        "Handler": "remote-outputs.on_event",
+        "Role": {
+          "Fn::GetAtt": [
+            "BackupRoleStackOutputsMyHandlerServiceRoleAACFE84E",
+            "Arn",
+          ],
+        },
+        "Runtime": "python3.8",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "BackupRoleStackOutputsMyHandlerServiceRoleAACFE84E": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "BackupRoleStackOutputsMyHandlerServiceRoleDefaultPolicyE63AF9A1": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "cloudformation:DescribeStacks",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "BackupRoleStackOutputsMyHandlerServiceRoleDefaultPolicyE63AF9A1",
+        "Roles": [
+          {
+            "Ref": "BackupRoleStackOutputsMyHandlerServiceRoleAACFE84E",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "BackupRoleStackOutputsMyProviderframeworkonEventA889CB9C": {
+      "DependsOn": [
+        "BackupRoleStackOutputsMyProviderframeworkonEventServiceRoleDefaultPolicy741B1080",
+        "BackupRoleStackOutputsMyProviderframeworkonEventServiceRole3609575C",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-ap-northeast-3",
+          },
+          "S3Key": "7382a0addb9f34974a1ea6c6c9b063882af874828f366f5c93b2b7b64db15c94.zip",
+        },
+        "Description": "AWS CDK resource provider framework - onEvent (BackupStage/ReplicaKeyStack/BackupRoleStackOutputs/MyProvider)",
+        "Environment": {
+          "Variables": {
+            "USER_ON_EVENT_FUNCTION_ARN": {
+              "Fn::GetAtt": [
+                "BackupRoleStackOutputsMyHandler7C1F850B",
+                "Arn",
+              ],
+            },
+          },
+        },
+        "Handler": "framework.onEvent",
+        "Role": {
+          "Fn::GetAtt": [
+            "BackupRoleStackOutputsMyProviderframeworkonEventServiceRole3609575C",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "BackupRoleStackOutputsMyProviderframeworkonEventLogRetention233BDBC5": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "BackupRoleStackOutputsMyProviderframeworkonEventA889CB9C",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 1,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
+    "BackupRoleStackOutputsMyProviderframeworkonEventServiceRole3609575C": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "BackupRoleStackOutputsMyProviderframeworkonEventServiceRoleDefaultPolicy741B1080": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "BackupRoleStackOutputsMyHandler7C1F850B",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "BackupRoleStackOutputsMyHandler7C1F850B",
+                          "Arn",
+                        ],
+                      },
+                      ":*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "BackupRoleStackOutputsMyProviderframeworkonEventServiceRoleDefaultPolicy741B1080",
+        "Roles": [
+          {
+            "Ref": "BackupRoleStackOutputsMyProviderframeworkonEventServiceRole3609575C",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "BackupRoleStackOutputsRemoteOutputs376098F0": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "BackupRoleStackOutputsMyProviderframeworkonEventA889CB9C",
+            "Arn",
+          ],
+        },
+        "randomString": "<RANDOM STRING>",
+        "regionName": "ap-northeast-1",
+        "stackName": "BackupStage-BackupRoleStack",
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "Key": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "KeyPolicy": {
+          "Fn::Join": [
+            "",
+            [
+              "{"Statement":[{"Action":"kms:*","Effect":"Allow","Principal":{"AWS":["arn:aws:iam::123456789012:user/test-user1","arn:aws:iam::123456789012:user/test-user2"]},"Resource":"*"},{"Action":"kms:*","Condition":{"ArnLike":{"aws:PrincipalArn":"arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":iam::",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":role/cdk-*-cfn-exec-role-",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              "-",
+              {
+                "Ref": "AWS::Region",
+              },
+              ""}},"Effect":"Allow","Principal":{"AWS":"arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":iam::",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":root"},"Resource":"*"},{"Action":["kms:Encrypt","kms:Decrypt","kms:ReEncrypt*","kms:GenerateDataKey*","kms:DescribeKey"],"Effect":"Allow","Principal":{"AWS":"",
+              {
+                "Fn::GetAtt": [
+                  "BackupRoleStackOutputsRemoteOutputs376098F0",
+                  "BackupRoleArn",
+                ],
+              },
+              ""},"Resource":"*"},{"Action":"kms:CreateGrant","Condition":{"StringEquals":{"kms:GrantIsForAWSResource":true}},"Effect":"Allow","Principal":{"AWS":"",
+              {
+                "Fn::GetAtt": [
+                  "BackupRoleStackOutputsRemoteOutputs376098F0",
+                  "BackupRoleArn",
+                ],
+              },
+              ""},"Resource":"*"}],"Version":"2012-10-17"}",
+            ],
+          ],
+        },
+        "PrimaryKeyArn": {
+          "Fn::GetAtt": [
+            "PrimaryKeyStackOutputsRemoteOutputs136EF796",
+            "KeyArn",
+          ],
+        },
+      },
+      "Type": "AWS::KMS::ReplicaKey",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
+      "DependsOn": [
+        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-ap-northeast-3",
+          },
+          "S3Key": "5bc602ecde93c947efe5899ae355f999986a1acbe610b1c0b9c468d738857555.zip",
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:PutRetentionPolicy",
+                "logs:DeleteRetentionPolicy",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+        "Roles": [
+          {
+            "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "PrimaryKeyStackOutputsMyHandler98381889": {
+      "DependsOn": [
+        "PrimaryKeyStackOutputsMyHandlerServiceRoleDefaultPolicy0F89BE9F",
+        "PrimaryKeyStackOutputsMyHandlerServiceRole08ECE9BF",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-ap-northeast-3",
+          },
+          "S3Key": "3803df2f6849acf50bb6577ee095a669940670e799f70a2be34893a399777bc3.zip",
+        },
+        "Handler": "remote-outputs.on_event",
+        "Role": {
+          "Fn::GetAtt": [
+            "PrimaryKeyStackOutputsMyHandlerServiceRole08ECE9BF",
+            "Arn",
+          ],
+        },
+        "Runtime": "python3.8",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "PrimaryKeyStackOutputsMyHandlerServiceRole08ECE9BF": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "PrimaryKeyStackOutputsMyHandlerServiceRoleDefaultPolicy0F89BE9F": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "cloudformation:DescribeStacks",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "PrimaryKeyStackOutputsMyHandlerServiceRoleDefaultPolicy0F89BE9F",
+        "Roles": [
+          {
+            "Ref": "PrimaryKeyStackOutputsMyHandlerServiceRole08ECE9BF",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "PrimaryKeyStackOutputsMyProviderframeworkonEvent5A90E62F": {
+      "DependsOn": [
+        "PrimaryKeyStackOutputsMyProviderframeworkonEventServiceRoleDefaultPolicy4A27B349",
+        "PrimaryKeyStackOutputsMyProviderframeworkonEventServiceRole676786CB",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-ap-northeast-3",
+          },
+          "S3Key": "7382a0addb9f34974a1ea6c6c9b063882af874828f366f5c93b2b7b64db15c94.zip",
+        },
+        "Description": "AWS CDK resource provider framework - onEvent (BackupStage/ReplicaKeyStack/PrimaryKeyStackOutputs/MyProvider)",
+        "Environment": {
+          "Variables": {
+            "USER_ON_EVENT_FUNCTION_ARN": {
+              "Fn::GetAtt": [
+                "PrimaryKeyStackOutputsMyHandler98381889",
+                "Arn",
+              ],
+            },
+          },
+        },
+        "Handler": "framework.onEvent",
+        "Role": {
+          "Fn::GetAtt": [
+            "PrimaryKeyStackOutputsMyProviderframeworkonEventServiceRole676786CB",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "PrimaryKeyStackOutputsMyProviderframeworkonEventLogRetentionBFA22DAF": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "PrimaryKeyStackOutputsMyProviderframeworkonEvent5A90E62F",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 1,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
+    "PrimaryKeyStackOutputsMyProviderframeworkonEventServiceRole676786CB": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "PrimaryKeyStackOutputsMyProviderframeworkonEventServiceRoleDefaultPolicy4A27B349": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "PrimaryKeyStackOutputsMyHandler98381889",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "PrimaryKeyStackOutputsMyHandler98381889",
+                          "Arn",
+                        ],
+                      },
+                      ":*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "PrimaryKeyStackOutputsMyProviderframeworkonEventServiceRoleDefaultPolicy4A27B349",
+        "Roles": [
+          {
+            "Ref": "PrimaryKeyStackOutputsMyProviderframeworkonEventServiceRole676786CB",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "PrimaryKeyStackOutputsRemoteOutputs136EF796": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "PrimaryKeyStackOutputsMyProviderframeworkonEvent5A90E62F",
+            "Arn",
+          ],
+        },
+        "randomString": "<RANDOM STRING>",
+        "regionName": "ap-northeast-1",
+        "stackName": "BackupStage-PrimaryKeyStack",
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Snapshot test 4`] = `
+{
+  "Outputs": {
+    "BackupVaultArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "Vault",
+          "BackupVaultArn",
+        ],
+      },
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "Vault": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "BackupVaultName": {
+          "Fn::Join": [
+            "",
+            [
+              "backup-vault-",
+              {
+                "Ref": "AWS::Region",
+              },
+            ],
+          ],
+        },
+        "EncryptionKeyArn": {
+          "Fn::ImportValue": "BackupStage-ReplicaKeyStack:ExportsOutputFnGetAttKeyArn66D44B37",
+        },
+      },
+      "Type": "AWS::Backup::BackupVault",
+      "UpdateReplacePolicy": "Retain",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Snapshot test 5`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
+      "DependsOn": [
+        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-ap-northeast-1",
+          },
+          "S3Key": "5bc602ecde93c947efe5899ae355f999986a1acbe610b1c0b9c468d738857555.zip",
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:PutRetentionPolicy",
+                "logs:DeleteRetentionPolicy",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+        "Roles": [
+          {
+            "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "Plan": {
+      "Properties": {
+        "BackupPlan": {
+          "BackupPlanName": "cross-region-backup-plan",
+          "BackupPlanRule": [
+            {
+              "CompletionWindowMinutes": 180,
+              "CopyActions": [
+                {
+                  "DestinationBackupVaultArn": {
+                    "Fn::GetAtt": [
+                      "SubRegionBackupStackOutputsRemoteOutputs7905F698",
+                      "BackupVaultArn",
+                    ],
+                  },
+                },
+              ],
+              "Lifecycle": {
+                "DeleteAfterDays": 7,
+              },
+              "RuleName": "cross-region-backup-plan-rule",
+              "ScheduleExpression": "cron(0 * * * ? *)",
+              "StartWindowMinutes": 60,
+              "TargetBackupVault": {
+                "Ref": "Vault",
+              },
+            },
+          ],
+        },
+      },
+      "Type": "AWS::Backup::BackupPlan",
+    },
+    "Selection": {
+      "Properties": {
+        "BackupPlanId": {
+          "Ref": "Plan",
+        },
+        "BackupSelection": {
+          "Conditions": {
+            "StringEquals": [
+              {
+                "ConditionKey": "aws:ResourceTag/Backup",
+                "ConditionValue": "True",
+              },
+            ],
+          },
+          "IamRoleArn": {
+            "Fn::ImportValue": "BackupStage-BackupRoleStack:ExportsOutputFnGetAttBackupRoleF43CFD90ArnD0257CF3",
+          },
+          "ListOfTags": [
+            {
+              "ConditionKey": "Backup",
+              "ConditionType": "STRINGEQUALS",
+              "ConditionValue": "True",
+            },
+          ],
+          "Resources": [
+            "arn:aws:ec2:*:*:instance/*",
+          ],
+          "SelectionName": "cross-region-backup-selection",
+        },
+      },
+      "Type": "AWS::Backup::BackupSelection",
+    },
+    "SubRegionBackupStackOutputsMyHandler4F0D9513": {
+      "DependsOn": [
+        "SubRegionBackupStackOutputsMyHandlerServiceRoleDefaultPolicyC463EE42",
+        "SubRegionBackupStackOutputsMyHandlerServiceRole63F7499B",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-ap-northeast-1",
+          },
+          "S3Key": "3803df2f6849acf50bb6577ee095a669940670e799f70a2be34893a399777bc3.zip",
+        },
+        "Handler": "remote-outputs.on_event",
+        "Role": {
+          "Fn::GetAtt": [
+            "SubRegionBackupStackOutputsMyHandlerServiceRole63F7499B",
+            "Arn",
+          ],
+        },
+        "Runtime": "python3.8",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "SubRegionBackupStackOutputsMyHandlerServiceRole63F7499B": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SubRegionBackupStackOutputsMyHandlerServiceRoleDefaultPolicyC463EE42": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "cloudformation:DescribeStacks",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "SubRegionBackupStackOutputsMyHandlerServiceRoleDefaultPolicyC463EE42",
+        "Roles": [
+          {
+            "Ref": "SubRegionBackupStackOutputsMyHandlerServiceRole63F7499B",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "SubRegionBackupStackOutputsMyProviderframeworkonEventE8861BAD": {
+      "DependsOn": [
+        "SubRegionBackupStackOutputsMyProviderframeworkonEventServiceRoleDefaultPolicy4573C375",
+        "SubRegionBackupStackOutputsMyProviderframeworkonEventServiceRole4C820555",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-ap-northeast-1",
+          },
+          "S3Key": "7382a0addb9f34974a1ea6c6c9b063882af874828f366f5c93b2b7b64db15c94.zip",
+        },
+        "Description": "AWS CDK resource provider framework - onEvent (BackupStage/MainRegionBackupStack/SubRegionBackupStackOutputs/MyProvider)",
+        "Environment": {
+          "Variables": {
+            "USER_ON_EVENT_FUNCTION_ARN": {
+              "Fn::GetAtt": [
+                "SubRegionBackupStackOutputsMyHandler4F0D9513",
+                "Arn",
+              ],
+            },
+          },
+        },
+        "Handler": "framework.onEvent",
+        "Role": {
+          "Fn::GetAtt": [
+            "SubRegionBackupStackOutputsMyProviderframeworkonEventServiceRole4C820555",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "SubRegionBackupStackOutputsMyProviderframeworkonEventLogRetention0911020D": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "SubRegionBackupStackOutputsMyProviderframeworkonEventE8861BAD",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 1,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
+    "SubRegionBackupStackOutputsMyProviderframeworkonEventServiceRole4C820555": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SubRegionBackupStackOutputsMyProviderframeworkonEventServiceRoleDefaultPolicy4573C375": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "SubRegionBackupStackOutputsMyHandler4F0D9513",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "SubRegionBackupStackOutputsMyHandler4F0D9513",
+                          "Arn",
+                        ],
+                      },
+                      ":*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "SubRegionBackupStackOutputsMyProviderframeworkonEventServiceRoleDefaultPolicy4573C375",
+        "Roles": [
+          {
+            "Ref": "SubRegionBackupStackOutputsMyProviderframeworkonEventServiceRole4C820555",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "SubRegionBackupStackOutputsRemoteOutputs7905F698": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "SubRegionBackupStackOutputsMyProviderframeworkonEventE8861BAD",
+            "Arn",
+          ],
+        },
+        "randomString": "<RANDOM STRING>",
+        "regionName": "ap-northeast-3",
+        "stackName": "BackupStage-SubRegionBackupStack",
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "Vault": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "BackupVaultName": {
+          "Fn::Join": [
+            "",
+            [
+              "backup-vault-",
+              {
+                "Ref": "AWS::Region",
+              },
+            ],
+          ],
+        },
+        "EncryptionKeyArn": {
+          "Fn::ImportValue": "BackupStage-PrimaryKeyStack:ExportsOutputFnGetAttKey961B73FDArn5A860C43",
+        },
+      },
+      "Type": "AWS::Backup::BackupVault",
+      "UpdateReplacePolicy": "Retain",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
